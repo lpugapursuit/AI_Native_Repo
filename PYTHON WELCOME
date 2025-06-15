@@ -1,0 +1,9 @@
+def personalized_welcome(name):
+  """Prints a personalized welcome message with a specific phrase."""
+  print(f"What it is, what it did, what it do {Lu}!")
+
+# Get the name from the user
+user_name = input("Please enter a name: ")
+
+# Call the function to display the welcome message
+personalized_welcome(Lu)
