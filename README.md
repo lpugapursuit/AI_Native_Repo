@@ -1,0 +1,2 @@
+
+Welcome to the digital home for AI_Native_Repo, where our code is held together by caffeine and sheer willpower. This repository's function is to wrangle all our brilliant (and occasionally questionable) ideas into something that actually works. Feel free to peek around, file an issue if you find a "surprise feature," or submit a pull request if you're brave enough to join the chaos.
