@@ -1,9 +1,15 @@
-def personalized_welcome(name):
-  """Prints a personalized welcome message with a specific phrase."""
-  print(f"What it is, what it did, what it do {Lu}!")
+# This script asks the user for their name and then prints a personalized greeting.
 
-# Get the name from the user
-user_name = input("Please enter a name: ")
+# 1. Ask the user for their name.
+# The 'input()' function displays the text inside the parentheses and then
+# waits for the user to type something and press Enter.
+# Whatever the user types is then stored in the 'user_name' variable.
+user_name = input("Please enter your name: ")
 
-# Call the function to display the welcome message
-personalized_welcome(Lu)
+# 2. Print a personalized greeting.
+# We use an f-string (formatted string literal) to easily insert the
+# 'user_name' into our greeting message.
+print(f"Hello, {user_name}! Welcome to the world of Python programming.")
+
+# You can also add another line, like the original "Hello World" if you want!
+# print("Hello World!")
