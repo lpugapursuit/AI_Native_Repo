@@ -48,15 +48,78 @@
                 display: block;
             }
         }
+        /* Custom Cursor Styles */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.12);
+            border: 2px solid #f87171;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%) scale(1);
+            transition: transform 0.15s cubic-bezier(.4,0,.2,1), opacity 0.2s;
+            opacity: 0.85;
+            mix-blend-mode: lighten;
+        }
+        .custom-cursor.active {
+            transform: translate(-50%, -50%) scale(1.5);
+            opacity: 0.5;
+        }
+        .custom-cursor.click {
+            transform: translate(-50%, -50%) scale(0.7);
+            opacity: 0.7;
+        }
+        .custom-cursor.hide {
+            opacity: 0;
+        }
+        /* Hide default cursor */
+        body, a, button, input, textarea {
+            cursor: none !important;
+        }
     </style>
     <script>
         function toggleMenu() {
             const menu = document.getElementById('mobileNav');
             menu.classList.toggle('hidden');
         }
+        // Custom Cursor Script
+        const cursor = document.getElementById('customCursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorVisible = true;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+            if (!cursorVisible) {
+                cursor.classList.remove('hide');
+                cursorVisible = true;
+            }
+        });
+        document.addEventListener('mouseleave', () => {
+            cursor.classList.add('hide');
+            cursorVisible = false;
+        });
+        document.addEventListener('mouseenter', () => {
+            cursor.classList.remove('hide');
+            cursorVisible = true;
+        });
+        // Scale on link/button hover
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+        // Shrink on click
+        document.addEventListener('mousedown', () => cursor.classList.add('click'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('click'));
     </script>
 </head>
 <body class="bg-black text-white">
+    <div id="customCursor" class="custom-cursor"></div>
     <!-- Navigation -->
     <nav class="fixed w-full bg-black bg-opacity-95 z-50 border-b border-gray-800">
         <div class="container mx-auto px-6 py-4 flex items-center justify-between">
