@@ -3,235 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmmaker Portfolio</title>
+    <title>My AI Journey Begins!</title>
+    <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* Custom styles to ensure Arial is the base font and apply some basic text shadow for 'stylized' feel */
         body {
-            font-family: 'Inter', sans-serif;
-            background: #000;
-            color: #fff;
-            scroll-behavior: smooth;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.04em;
-        }
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                        url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        .project-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.4);
-        }
-        .nav-link {
-            transition: color 0.2s;
-        }
-        .nav-link:hover {
-            color: #f87171;
-        }
-        .mobile-menu {
-            display: none;
-        }
-        @media (max-width: 768px) {
-            .desktop-menu {
-                display: none;
-            }
-            .mobile-menu {
-                display: block;
-            }
-        }
-        /* Custom Cursor Styles */
-        .custom-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 36px;
-            height: 36px;
-            background: rgba(255,255,255,0.12);
-            border: 2px solid #f87171;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%) scale(1);
-            transition: transform 0.15s cubic-bezier(.4,0,.2,1), opacity 0.2s;
-            opacity: 0.85;
-            mix-blend-mode: lighten;
-        }
-        .custom-cursor.active {
-            transform: translate(-50%, -50%) scale(1.5);
-            opacity: 0.5;
-        }
-        .custom-cursor.click {
-            transform: translate(-50%, -50%) scale(0.7);
-            opacity: 0.7;
-        }
-        .custom-cursor.hide {
-            opacity: 0;
-        }
-        /* Hide default cursor */
-        body, a, button, input, textarea {
-            cursor: none !important;
+            font-family: Arial, sans-serif; /* Explicitly setting Arial */
+            /* Applying a subtle text shadow to make the text appear 'stylized' */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            line-height: 1.6; /* Improve readability */
         }
     </style>
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('mobileNav');
-            menu.classList.toggle('hidden');
-        }
-        // Custom Cursor Script
-        const cursor = document.getElementById('customCursor');
-        let mouseX = 0, mouseY = 0;
-        let cursorVisible = true;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursor.style.left = mouseX + 'px';
-            cursor.style.top = mouseY + 'px';
-            if (!cursorVisible) {
-                cursor.classList.remove('hide');
-                cursorVisible = true;
-            }
-        });
-        document.addEventListener('mouseleave', () => {
-            cursor.classList.add('hide');
-            cursorVisible = false;
-        });
-        document.addEventListener('mouseenter', () => {
-            cursor.classList.remove('hide');
-            cursorVisible = true;
-        });
-        // Scale on link/button hover
-        document.querySelectorAll('a, button').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-        });
-        // Shrink on click
-        document.addEventListener('mousedown', () => cursor.classList.add('click'));
-        document.addEventListener('mouseup', () => cursor.classList.remove('click'));
-    </script>
 </head>
-<body class="bg-black text-white">
-    <div id="customCursor" class="custom-cursor"></div>
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-black bg-opacity-95 z-50 border-b border-gray-800">
-        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="text-2xl font-bold tracking-widest" style="font-family: 'Montserrat', sans-serif;">Your Name</div>
-            <div class="desktop-menu flex space-x-10">
-                <a href="#home" class="nav-link uppercase text-sm tracking-widest">Home</a>
-                <a href="#about" class="nav-link uppercase text-sm tracking-widest">About</a>
-                <a href="#projects" class="nav-link uppercase text-sm tracking-widest">Portfolio</a>
-                <a href="#contact" class="nav-link uppercase text-sm tracking-widest">Contact</a>
-            </div>
-            <button class="mobile-menu text-2xl focus:outline-none" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        <div id="mobileNav" class="mobile-menu hidden bg-black bg-opacity-95 px-6 pb-4">
-            <a href="#home" class="block py-2 nav-link uppercase text-sm tracking-widest">Home</a>
-            <a href="#about" class="block py-2 nav-link uppercase text-sm tracking-widest">About</a>
-            <a href="#projects" class="block py-2 nav-link uppercase text-sm tracking-widest">Portfolio</a>
-            <a href="#contact" class="block py-2 nav-link uppercase text-sm tracking-widest">Contact</a>
-        </div>
-    </nav>
+<body class="min-h-screen flex flex-col items-center justify-center p-8
+             bg-gradient-to-br from-red-600 to-blue-600
+             text-white">
+    <!-- Main container for content, centered and with rounded corners -->
+    <div class="bg-white bg-opacity-20 backdrop-blur-sm p-8 rounded-xl shadow-lg
+                text-center max-w-2xl mx-auto border border-white border-opacity-30">
+        <h1 class="text-5xl font-bold mb-6 tracking-wide leading-tight text-white drop-shadow-lg">
+            My AI Journey Begins!
+        </h1>
+        <p class="text-lg mb-4 italic text-white text-opacity-90">
+            "The only way to do great work is to love what you do." - Steve Jobs
+        </p>
+        <p class="text-base text-white text-opacity-80">
+            Welcome to the starting point of an exciting exploration into the world of Artificial Intelligence.
+            Prepare to discover, learn, and innovate as we embark on this incredible journey together.
+        </p>
+    </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section min-h-screen flex items-center justify-center pt-24 pb-12">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-5xl md:text-7xl font-bold mb-8 tracking-tight leading-tight">Filmmaker & Producer</h1>
-            <p class="text-xl md:text-2xl mb-10 text-gray-200">Crafting compelling stories through visual storytelling</p>
-            <a href="#projects" class="bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-full transition text-lg font-bold tracking-widest shadow-lg">
-                View My Work
-            </a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-24 bg-black border-t border-b border-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold mb-14 text-center tracking-widest">About Me</h2>
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <p class="text-lg mb-8 text-gray-300">
-                        [Your compelling bio here - describe your journey, passion, and expertise in filmmaking]
-                    </p>
-                    <div class="flex space-x-6 mt-6">
-                        <a href="#" class="text-2xl hover:text-red-500 transition"><i class="fab fa-vimeo"></i></a>
-                        <a href="#" class="text-2xl hover:text-red-500 transition"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-2xl hover:text-red-500 transition"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="bg-gray-900 p-8 rounded-lg border border-gray-800">
-                        <h3 class="text-xl font-bold mb-2">Directing</h3>
-                        <p class="text-gray-400">Expertise in visual storytelling and creative direction</p>
-                    </div>
-                    <div class="bg-gray-900 p-8 rounded-lg border border-gray-800">
-                        <h3 class="text-xl font-bold mb-2">Producing</h3>
-                        <p class="text-gray-400">Project management and production coordination</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-24">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold mb-14 text-center tracking-widest">Portfolio</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <a href="/project1" class="project-card group block bg-gray-900 rounded-lg p-8 border border-gray-800 transition hover:bg-red-600">
-                    <h3 class="text-xl font-bold group-hover:text-white mb-2">Project Title</h3>
-                    <p class="text-gray-400 group-hover:text-white">Short description</p>
-                </a>
-                <!-- Repeat for more projects -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-black border-t border-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold mb-14 text-center tracking-widest">Get in Touch</h2>
-            <div class="max-w-2xl mx-auto">
-                <form class="space-y-8">
-                    <div>
-                        <label class="block mb-2">Name</label>
-                        <input type="text" class="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-                    </div>
-                    <div>
-                        <label class="block mb-2">Email</label>
-                        <input type="email" class="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-                    </div>
-                    <div>
-                        <label class="block mb-2">Message</label>
-                        <textarea class="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-full transition text-lg font-bold tracking-widest shadow-lg">
-                        Send Message
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black py-10 border-t border-gray-800">
-        <div class="container mx-auto px-6 text-center">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="#" class="text-xl hover:text-red-500 transition"><i class="fab fa-vimeo"></i></a>
-                <a href="#" class="text-xl hover:text-red-500 transition"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-xl hover:text-red-500 transition"><i class="fab fa-linkedin"></i></a>
-            </div>
-            <p class="text-gray-500">&copy; 2024 Your Name. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html> 
