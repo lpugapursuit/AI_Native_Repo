@@ -570,28 +570,40 @@
                 const isWhitePiece = piece && piece === piece.toUpperCase();
                 const isBlackPiece = piece && piece === piece.toLowerCase();
 
+                console.log(`Clicked square (${row},${col}), piece: ${piece}, current player: ${this.currentPlayer}`);
+
                 this.clearHighlights();
 
                 if (this.selectedSquare) {
                     const [selectedRow, selectedCol] = this.selectedSquare;
                     const selectedPiece = this.board[selectedRow][selectedCol];
                     
+                    console.log(`Selected square: (${selectedRow},${selectedCol}), piece: ${selectedPiece}`);
+                    
                     if (this.isValidMove(selectedRow, selectedCol, row, col)) {
+                        console.log('Move is valid, executing...');
                         this.makeMove(selectedRow, selectedCol, row, col);
                         this.selectedSquare = null;
                     } else if (row === selectedRow && col === selectedCol) {
+                        console.log('Deselecting square');
                         this.selectedSquare = null;
                     } else if ((this.currentPlayer === 'white' && isWhitePiece) || 
                                (this.currentPlayer === 'black' && isBlackPiece)) {
+                        console.log('Selecting new piece');
                         this.selectedSquare = [row, col];
                         this.highlightSquare(row, col, 'selected');
                         this.highlightValidMoves(row, col);
+                    } else {
+                        console.log('Invalid move or wrong player');
                     }
                 } else if ((this.currentPlayer === 'white' && isWhitePiece) || 
                           (this.currentPlayer === 'black' && isBlackPiece)) {
+                    console.log('Selecting piece');
                     this.selectedSquare = [row, col];
                     this.highlightSquare(row, col, 'selected');
                     this.highlightValidMoves(row, col);
+                } else {
+                    console.log('No piece selected and clicked square has no valid piece');
                 }
             }
 
@@ -725,11 +737,15 @@
             }
 
             executeMove(fromRow, fromCol, toRow, toCol, piece, promotionPiece = null) {
+                console.log(`Executing move: ${piece} from (${fromRow},${fromCol}) to (${toRow},${toCol})`);
+                
                 const movePiece = promotionPiece || piece;
                 const capturedPiece = this.board[toRow][toCol];
                 
                 this.board[fromRow][fromCol] = '';
                 this.board[toRow][toCol] = movePiece;
+                
+                console.log('Board updated, captured piece:', capturedPiece);
                 
                 // Handle captured piece
                 if (capturedPiece) {
@@ -751,6 +767,12 @@
                 
                 // Check for game end conditions
                 this.checkGameEnd();
+                
+                // Re-render the board to show updated positions
+                setTimeout(() => {
+                    console.log('Re-rendering board...');
+                    this.renderBoard();
+                }, 100);
                 
                 this.updateGameInfo();
                 this.updateMoveHistory();
@@ -779,9 +801,6 @@
                     const piece = square.querySelector('.piece');
                     if (piece) {
                         piece.classList.add('capture-animation');
-                        setTimeout(() => {
-                            piece.remove();
-                        }, 500);
                     }
                 }
             }
