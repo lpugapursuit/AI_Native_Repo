@@ -9,30 +9,152 @@
     <style>
         /* Custom styles to ensure Arial is the base font and apply some basic text shadow for 'stylized' feel */
         body {
-            font-family: Arial, sans-serif; /* Explicitly setting Arial */
-            /* Applying a subtle text shadow to make the text appear 'stylized' */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-            line-height: 1.6; /* Improve readability */
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .welcome-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .greeting-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 1rem;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: none;
+        }
+        .result.show {
+            display: block;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-8
-             bg-gradient-to-br from-red-600 to-blue-600
-             text-white">
-    <!-- Main container for content, centered and with rounded corners -->
-    <div class="bg-white bg-opacity-20 backdrop-blur-sm p-8 rounded-xl shadow-lg
-                text-center max-w-2xl mx-auto border border-white border-opacity-30">
-        <h1 class="text-5xl font-bold mb-6 tracking-wide leading-tight text-white drop-shadow-lg">
-            My AI Journey Begins!
-        </h1>
-        <p class="text-lg mb-4 italic text-white text-opacity-90">
+<body>
+    <div class="container">
+        <h1>My AI Journey Begins!</h1>
+        <div class="quote">
             "The only way to do great work is to love what you do." - Steve Jobs
-        </p>
-        <p class="text-base text-white text-opacity-80">
-            Welcome to the starting point of an exciting exploration into the world of Artificial Intelligence.
+        </div>
+        <div class="welcome-text">
+            Welcome to the starting point of an exciting exploration into the world of Artificial Intelligence. 
             Prepare to discover, learn, and innovate as we embark on this incredible journey together.
-        </p>
+        </div>
+        
+        <div class="greeting-form">
+            <h3>Let's Get to Know Each Other!</h3>
+            <div class="form-group">
+                <label for="userName">Hello! What's your name?</label>
+                <input type="text" id="userName" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="favoriteNumber">What's your favorite number?</label>
+                <input type="number" id="favoriteNumber" placeholder="Enter your favorite number">
+            </div>
+            <button onclick="greetUser()">Get My Lucky Number!</button>
+            
+            <div class="result" id="result">
+                <div id="greetingMessage"></div>
+                <div id="luckyNumber"></div>
+                <div id="farewell"></div>
+            </div>
+        </div>
     </div>
 
+    <script>
+        function greetUser() {
+            const userName = document.getElementById('userName').value;
+            const favoriteNumber = document.getElementById('favoriteNumber').value;
+            
+            if (!userName || !favoriteNumber) {
+                alert('Please fill in both fields!');
+                return;
+            }
+            
+            // Calculate lucky number (this will show the "bug" - string multiplication)
+            const luckyNumber = favoriteNumber * 2;
+            
+            // Display results
+            document.getElementById('greetingMessage').innerHTML = `
+                <p><strong>Nice to meet you, ${userName}!</strong></p>
+            `;
+            
+            document.getElementById('luckyNumber').innerHTML = `
+                <p>Your lucky number is: ${luckyNumber}</p>
+                <small style="color: #ffd700;">💡 JavaScript automatically converts strings to numbers for multiplication!</small>
+            `;
+            
+            document.getElementById('farewell').innerHTML = `
+                <p><em>Have a great day!</em></p>
+            `;
+            
+            // Show the result
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
 </body>
 </html> 
