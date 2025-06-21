@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, jsonify
-import random
+# This script asks the user for their name and then prints a personalized greeting.
 
-app = Flask(__name__)
+import random
 
 def get_comedic_greeting():
     greetings = [
@@ -23,30 +22,26 @@ def get_comedic_greeting():
     ]
     return random.choice(greetings)
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+# 1. Print a random comedic greeting
+print(get_comedic_greeting())
+print()  # Add a blank line for spacing
 
-@app.route('/greet', methods=['POST'])
-def greet():
-    data = request.get_json()
-    user_name = data.get('name', '')
-    favorite_number = data.get('favorite_number', 0)
-    
-    # Generate responses
-    comedic_greeting = get_comedic_greeting()
-    welcome_message = f"Hello, {user_name}! Welcome to the world of Python programming."
-    nice_message = f"Nice to meet you, {user_name}!"
-    lucky_number = int(favorite_number) * 2
-    lucky_message = f"Your lucky number is: {lucky_number}"
-    
-    return jsonify({
-        'comedic_greeting': comedic_greeting,
-        'welcome_message': welcome_message,
-        'nice_message': nice_message,
-        'lucky_message': lucky_message,
-        'farewell': "Have a great day!"
-    })
+# 2. Ask the user for their name.
+# The 'input()' function displays the text inside the parentheses and then
+# waits for the user to type something and press Enter.
+# Whatever the user types is then stored in the 'user_name' variable.
+user_name = input("Please enter your name: ")
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+# 3. Print a personalized greeting.
+# We use an f-string (formatted string literal) to easily insert the
+# 'user_name' into our greeting message.
+print(f"Hello, {user_name}! Welcome to the world of Python programming.")
+
+# 4. Additional greeting and lucky number feature
+print(f"Nice to meet you, {user_name}!")
+
+# Ask for favorite number to calculate lucky number
+favorite_number = int(input("What's your favorite number? "))
+lucky_number = favorite_number * 2
+print(f"Your lucky number is: {lucky_number}")
+print("Have a great day!")

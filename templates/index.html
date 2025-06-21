@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Welcome - Web Version</title>
+    <title>Python Greeting App</title>
     <style>
         * {
             margin: 0;
@@ -23,109 +23,235 @@
 
         .container {
             background: white;
-            padding: 40px;
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 500px;
+            padding: 40px;
+            max-width: 600px;
             width: 100%;
+            text-align: center;
         }
 
         h1 {
             color: #333;
             margin-bottom: 30px;
             font-size: 2.5em;
-            font-weight: 300;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .form-group {
             margin-bottom: 25px;
+            text-align: left;
         }
 
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #555;
+            font-weight: 600;
             font-size: 1.1em;
-            font-weight: 500;
         }
 
-        input[type="text"] {
+        input {
             width: 100%;
             padding: 15px;
             border: 2px solid #e1e5e9;
             border-radius: 10px;
-            font-size: 1.1em;
-            transition: border-color 0.3s ease;
-            outline: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
 
-        input[type="text"]:focus {
+        input:focus {
+            outline: none;
             border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             border: none;
             padding: 15px 30px;
             border-radius: 10px;
-            font-size: 1.1em;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease;
-            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
 
         button:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
 
-        .greeting {
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
             margin-top: 30px;
             padding: 20px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border-radius: 10px;
-            font-size: 1.2em;
-            font-weight: 500;
-            animation: fadeIn 0.5s ease;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .python-logo {
-            font-size: 3em;
-            margin-bottom: 20px;
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+
+        .comedic {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+
+        .welcome {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+
+        .nice {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .lucky {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .farewell {
+            background: #e2e3e5;
+            border: 1px solid #d6d8db;
+            color: #383d41;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="python-logo">🐍</div>
-        <h1>Python Welcome</h1>
+        <h1>🐍 Python Greeting App</h1>
         
-        <form method="POST">
+        <form id="greetingForm">
             <div class="form-group">
-                <label for="user_name">Please enter your name:</label>
-                <input type="text" id="user_name" name="user_name" required>
+                <label for="name">What's your name?</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name..." required>
             </div>
-            <button type="submit">Get Greeting</button>
+            
+            <div class="form-group">
+                <label for="favorite_number">What's your favorite number?</label>
+                <input type="number" id="favorite_number" name="favorite_number" placeholder="Enter a number..." required>
+            </div>
+            
+            <button type="submit" id="submitBtn">Get Your Greeting! 🚀</button>
         </form>
 
-        {% if greeting %}
-        <div class="greeting">
-            {{ greeting }}
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Generating your personalized greeting...</p>
         </div>
-        {% endif %}
+
+        <div class="result" id="result">
+            <div class="message comedic" id="comedicGreeting"></div>
+            <div class="message welcome" id="welcomeMessage"></div>
+            <div class="message nice" id="niceMessage"></div>
+            <div class="message lucky" id="luckyMessage"></div>
+            <div class="message farewell" id="farewellMessage"></div>
+        </div>
     </div>
+
+    <script>
+        document.getElementById('greetingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+            
+            // Show loading, hide result
+            submitBtn.disabled = true;
+            loading.style.display = 'block';
+            result.classList.remove('show');
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                favorite_number: document.getElementById('favorite_number').value
+            };
+            
+            try {
+                const response = await fetch('/greet', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                // Update result messages
+                document.getElementById('comedicGreeting').textContent = data.comedic_greeting;
+                document.getElementById('welcomeMessage').textContent = data.welcome_message;
+                document.getElementById('niceMessage').textContent = data.nice_message;
+                document.getElementById('luckyMessage').textContent = data.lucky_message;
+                document.getElementById('farewellMessage').textContent = data.farewell;
+                
+                // Show result
+                loading.style.display = 'none';
+                result.classList.add('show');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Something went wrong! Please try again.');
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html> 
