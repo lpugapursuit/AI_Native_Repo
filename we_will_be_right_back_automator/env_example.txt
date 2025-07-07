@@ -1,0 +1,29 @@
+# OpenAI API Configuration
+API_KEY_OPENAI=your_openai_api_key_here
+
+# Social Media API Keys and Access Tokens
+TWITTER_API_KEY=your_twitter_api_key_here
+TWITTER_ACCESS_TOKEN=your_twitter_access_token_here
+
+YOUTUBE_API_KEY=your_youtube_api_key_here
+YOUTUBE_ACCESS_TOKEN=your_youtube_access_token_here
+
+INSTAGRAM_API_KEY=your_instagram_api_key_here
+INSTAGRAM_ACCESS_TOKEN=your_instagram_access_token_here
+
+TIKTOK_API_KEY=your_tiktok_api_key_here
+TIKTOK_ACCESS_TOKEN=your_tiktok_access_token_here
+
+LINKEDIN_API_KEY=your_linkedin_api_key_here
+LINKEDIN_ACCESS_TOKEN=your_linkedin_access_token_here
+
+FACEBOOK_API_KEY=your_facebook_api_key_here
+FACEBOOK_ACCESS_TOKEN=your_facebook_access_token_here
+
+# Other API Keys
+GOOGLE_API_KEY=your_google_api_key_here
+WEATHER_API_KEY=your_weather_api_key_here
+
+# Application Settings
+DEBUG=False
+LOG_LEVEL=INFO 
